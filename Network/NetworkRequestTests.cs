@@ -8,21 +8,21 @@ namespace RetroAchievementsModTests.Network
         [TestMethod]
         public void BuildLoginRequestTest()
         {
-            RequestManager.BuildLoginRequest("retroachievements.org", "TimmoneSimmons", "supersecretpass", out UriBuilder request);
+            NetworkRequest.BuildLoginRequest("retroachievements.org", "TimmoneSimmons", "supersecretpass", out UriBuilder request);
             Assert.AreEqual("https://retroachievements.org/dorequest.php?r=login2&u=TimmoneSimmons&p=supersecretpass", request.Uri.ToString());
         }
 
         [TestMethod]
         public void BuildStartSessionRequestTest()
         {
-            RequestManager.BuildStartSessionRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", 32123, out UriBuilder request);
+            NetworkRequest.BuildStartSessionRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", 32123, out UriBuilder request);
             Assert.AreEqual("https://retroachievements.org/dorequest.php?r=startsession&u=TimmoneSimmons&t=0123456789abcdef&g=32123", request.Uri.ToString());
         }
 
         [TestMethod]
         public async Task BuildPingRequestTest()
         {
-            RequestManager.BuildPingRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", 32123, "Digging a hellevator 👌", out UriBuilder request, out MultipartFormDataContent multipart);
+            NetworkRequest.BuildPingRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", 32123, "Digging a hellevator 👌", out UriBuilder request, out MultipartFormDataContent multipart);
             Assert.AreEqual("https://retroachievements.org/dorequest.php?r=ping&u=TimmoneSimmons&t=0123456789abcdef&g=32123", request.Uri.ToString());
 
             Assert.IsNotNull(multipart.First().Headers.ContentDisposition);
@@ -33,14 +33,14 @@ namespace RetroAchievementsModTests.Network
         [TestMethod]
         public void BuildAwardAchievementTest()
         {
-            RequestManager.BuildAwardAchievementRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", true, 32123, out UriBuilder request);
+            NetworkRequest.BuildAwardAchievementRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", true, 32123, out UriBuilder request);
             Assert.AreEqual("https://retroachievements.org/dorequest.php?r=awardachievement&u=TimmoneSimmons&t=0123456789abcdef&h=1&a=32123&v=7a3f30386627952180d5afbae3beee6f", request.Uri.ToString());
         }
 
         [TestMethod]
         public async Task BuildAwardAchievementsRequestTest()
         {
-            RequestManager.BuildAwardAchievementsRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", true, [483244, 483245, 483246], out UriBuilder request, out MultipartFormDataContent multipart);
+            NetworkRequest.BuildAwardAchievementsRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", true, [483244, 483245, 483246], out UriBuilder request, out MultipartFormDataContent multipart);
             Assert.AreEqual("https://retroachievements.org/dorequest.php?r=awardachievements&u=TimmoneSimmons&t=0123456789abcdef", request.Uri.ToString());
 
             Assert.IsNotNull(multipart.First().Headers.ContentDisposition);
