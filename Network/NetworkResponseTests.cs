@@ -16,7 +16,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void SuccessTest()
         {
             string json = "{\"Success\":true}";
-            BaseResponse? response = JsonSerializer.Deserialize<BaseResponse>(json);
+            BaseResponse response = JsonSerializer.Deserialize<BaseResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.Success);
@@ -29,7 +29,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void ErrorTest()
         {
             string json = "{\"Success\":false,\"Error\":\"There is an error here.\"}";
-            BaseResponse? response = JsonSerializer.Deserialize<BaseResponse>(json);
+            BaseResponse response = JsonSerializer.Deserialize<BaseResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsFalse(response.Success);
@@ -50,7 +50,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void SuccessTest()
         {
             string json = "{\"Success\":true,\"User\":\"TimmoneSimmons\",\"Token\":\"0123456789abcdef\",\"Score\":69420,\"SoftcoreScore\":1337,\"Messages\":99,\"Permissions\":3,\"AccountType\":\"Developer\"}";
-            LoginResponse? response = JsonSerializer.Deserialize<LoginResponse>(json);
+            LoginResponse response = JsonSerializer.Deserialize<LoginResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.Success);
@@ -70,7 +70,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void ErrorTest()
         {
             string json = "{\"Success\":false,\"Error\":\"Invalid user\\/token combination.\",\"Code\":\"invalid_credentials\",\"Status\":401}";
-            LoginResponse? response = JsonSerializer.Deserialize<LoginResponse>(json);
+            LoginResponse response = JsonSerializer.Deserialize<LoginResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsFalse(response.Success);
@@ -91,7 +91,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void SuccessTest()
         {
             string json = "{\"Success\":true,\"HardcoreUnlocks\":[{\"ID\":483244,\"When\":1735947878},{\"ID\":483245,\"When\":1735947888}],\"ServerNow\":1735947898}";
-            StartSessionResponse? response = JsonSerializer.Deserialize<StartSessionResponse>(json);
+            StartSessionResponse response = JsonSerializer.Deserialize<StartSessionResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.Success);
@@ -108,7 +108,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void ErrorTest()
         {
             string json = "{\"Success\":false,\"Error\":\"Unknown game\"}";
-            StartSessionResponse? response = JsonSerializer.Deserialize<StartSessionResponse>(json);
+            StartSessionResponse response = JsonSerializer.Deserialize<StartSessionResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsFalse(response.Success);
@@ -129,7 +129,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void SuccessTest()
         {
             string json = "{\"Success\":true,\"AchievementsRemaining\":2,\"Score\":69420,\"SoftcoreScore\":1337,\"AchievementID\":483244}";
-            AwardAchievementResponse? response = JsonSerializer.Deserialize<AwardAchievementResponse>(json);
+            AwardAchievementResponse response = JsonSerializer.Deserialize<AwardAchievementResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.Success);
@@ -147,7 +147,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void ErrorTestAlreadyUnlocked()
         {
             string json = "{\"Success\":false,\"AchievementsRemaining\":0,\"Error\":\"User already has this achievement unlocked.\",\"Score\":69420,\"SoftcoreScore\":1337,\"AchievementID\":213632}";
-            AwardAchievementResponse? response = JsonSerializer.Deserialize<AwardAchievementResponse>(json);
+            AwardAchievementResponse response = JsonSerializer.Deserialize<AwardAchievementResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsFalse(response.Success);
@@ -165,7 +165,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void ErrorTestInvalid()
         {
             string json = "{\"Success\":false,\"Error\":\"Data not found for achievement 0\",\"Score\":69420,\"SoftcoreScore\":1337,\"AchievementID\":0}";
-            AwardAchievementResponse? response = JsonSerializer.Deserialize<AwardAchievementResponse>(json);
+            AwardAchievementResponse response = JsonSerializer.Deserialize<AwardAchievementResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsFalse(response.Success);
@@ -183,7 +183,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void ErrorTestUnofficial()
         {
             string json = "{\"Success\":false,\"Error\":\"Unofficial achievements cannot be unlocked\",\"Score\":69420,\"SoftcoreScore\":1337,\"AchievementID\":483244}";
-            AwardAchievementResponse? response = JsonSerializer.Deserialize<AwardAchievementResponse>(json);
+            AwardAchievementResponse response = JsonSerializer.Deserialize<AwardAchievementResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsFalse(response.Success);
@@ -207,7 +207,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void SuccessTest()
         {
             string json = "{\"Success\":true,\"Score\":69420,\"SoftcoreScore\":1337,\"ExistingIDs\":[483244],\"SuccessfulIDs\":[483245,483246]}";
-            AwardAchievementsResponse? response = JsonSerializer.Deserialize<AwardAchievementsResponse>(json);
+            AwardAchievementsResponse response = JsonSerializer.Deserialize<AwardAchievementsResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.Success);
@@ -232,7 +232,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void ErrorTestNoDelegation()
         {
             string json = "{\"Success\":false,\"Error\":\"You must specify a target user.\",\"Status\":400}";
-            AwardAchievementsResponse? response = JsonSerializer.Deserialize<AwardAchievementsResponse>(json);
+            AwardAchievementsResponse response = JsonSerializer.Deserialize<AwardAchievementsResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsFalse(response.Success);
