@@ -1,47 +1,72 @@
-﻿using RetroAchievementsMod.Network;
+﻿using RAStandaloneIntegration.Network;
 
-namespace RetroAchievementsModTests.Network
+namespace RAStandaloneIntegrationTests.Network
 {
+    /// <summary>
+    /// Used to test the NetworkRequest class
+    /// </summary>
     [TestClass]
-    public sealed class RequestManagerTests
+    public sealed class NetworkRequestTests
     {
+        /// <summary>
+        /// Request header shared between different NetworkRequest tests
+        /// </summary>
+        private readonly RequestHeader _header = new("ra.org", "TimmoneSimmons", "0123456789abcdef");
+
+        /// <summary>
+        /// Tests if a login2 request can be built correctly
+        /// </summary>
         [TestMethod]
         public void BuildLoginRequestTest()
         {
-            NetworkRequest.BuildLoginRequest("retroachievements.org", "TimmoneSimmons", "supersecretpass", out UriBuilder request);
-            Assert.AreEqual("https://retroachievements.org/dorequest.php?r=login2&u=TimmoneSimmons&p=supersecretpass", request.Uri.ToString());
+            Uri request = NetworkRequest.BuildLoginRequest(_header, "supersecretpass");
+            Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&r=login2&p=supersecretpass", request.ToString());
         }
 
+        /// <summary>
+        /// Tests if a startsession request can be built correctly
+        /// </summary>
         [TestMethod]
         public void BuildStartSessionRequestTest()
         {
-            NetworkRequest.BuildStartSessionRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", 32123, out UriBuilder request);
-            Assert.AreEqual("https://retroachievements.org/dorequest.php?r=startsession&u=TimmoneSimmons&t=0123456789abcdef&g=32123", request.Uri.ToString());
+            Uri request = NetworkRequest.BuildStartSessionRequest(_header, 32123);
+            Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=startsession&g=32123", request.ToString());
         }
 
+        /// <summary>
+        /// Tests if a ping request can be built correctly
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task BuildPingRequestTest()
         {
-            NetworkRequest.BuildPingRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", 32123, "Digging a hellevator 👌", out UriBuilder request, out MultipartFormDataContent multipart);
-            Assert.AreEqual("https://retroachievements.org/dorequest.php?r=ping&u=TimmoneSimmons&t=0123456789abcdef&g=32123", request.Uri.ToString());
+            Uri request = NetworkRequest.BuildPingRequest(_header, 32123, "Digging a hellevator 👌", out MultipartFormDataContent multipart);
+            Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=ping&g=32123", request.ToString());
 
             Assert.IsNotNull(multipart.First().Headers.ContentDisposition);
             Assert.AreEqual("m", multipart.First().Headers.ContentDisposition?.Name);
             Assert.AreEqual("Digging a hellevator 👌", await multipart.First().ReadAsStringAsync());
         }
 
+        /// <summary>
+        /// Tests if an awardachievement request can be built correctly
+        /// </summary>
         [TestMethod]
         public void BuildAwardAchievementTest()
         {
-            NetworkRequest.BuildAwardAchievementRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", true, 32123, out UriBuilder request);
-            Assert.AreEqual("https://retroachievements.org/dorequest.php?r=awardachievement&u=TimmoneSimmons&t=0123456789abcdef&h=1&a=32123&v=7a3f30386627952180d5afbae3beee6f", request.Uri.ToString());
+            Uri request = NetworkRequest.BuildAwardAchievementRequest(_header, true, 32123);
+            Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=awardachievement&h=1&a=32123&v=7a3f30386627952180d5afbae3beee6f", request.ToString());
         }
 
+        /// <summary>
+        /// Tests if an awardachievements request can be built correctly
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task BuildAwardAchievementsRequestTest()
         {
-            NetworkRequest.BuildAwardAchievementsRequest("retroachievements.org", "TimmoneSimmons", "0123456789abcdef", true, [483244, 483245, 483246], out UriBuilder request, out MultipartFormDataContent multipart);
-            Assert.AreEqual("https://retroachievements.org/dorequest.php?r=awardachievements&u=TimmoneSimmons&t=0123456789abcdef", request.Uri.ToString());
+            Uri request = NetworkRequest.BuildAwardAchievementsRequest(_header, true, [483244, 483245, 483246], out MultipartFormDataContent multipart);
+            Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=awardachievements", request.ToString());
 
             Assert.IsNotNull(multipart.First().Headers.ContentDisposition);
             Assert.AreEqual("h", multipart.First().Headers.ContentDisposition?.Name);
