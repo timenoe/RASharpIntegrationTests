@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using RAStandaloneIntegration.Network;
+using RASharpIntegration.Network;
 
 namespace RAStandaloneIntegrationTests.Network
 {

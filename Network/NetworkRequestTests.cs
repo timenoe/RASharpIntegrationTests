@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using RAStandaloneIntegration.Network;
+using RASharpIntegration.Network;
 
 namespace RAStandaloneIntegrationTests.Network
 {
