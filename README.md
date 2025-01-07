@@ -1,3 +1,3 @@
-# RAStandaloneIntegration Unit Tests
+# RASharpIntegration Tests
 
-Unit tests for RAStandaloneIntegration
+Unit tests for RASharpIntegration
