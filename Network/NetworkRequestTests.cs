@@ -15,7 +15,7 @@ namespace RAStandaloneIntegrationTests.Network
         /// <summary>
         /// Request header shared between different NetworkRequest tests
         /// </summary>
-        private readonly RequestHeader _header = new("ra.org", "TimmoneSimmons", "0123456789abcdef");
+        private readonly RequestHeader _header = new("ra.org", 32123, true, "TimmoneSimmons", "0123456789abcdef");
 
         /// <summary>
         /// Tests if a login2 request can be built correctly
@@ -33,7 +33,7 @@ namespace RAStandaloneIntegrationTests.Network
         [TestMethod]
         public void BuildStartSessionRequestTest()
         {
-            Uri request = NetworkRequest.BuildStartSessionRequest(_header, 32123);
+            Uri request = NetworkRequest.BuildStartSessionRequest(_header);
             Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=startsession&g=32123", request.ToString());
         }
 
@@ -44,7 +44,7 @@ namespace RAStandaloneIntegrationTests.Network
         [TestMethod]
         public async Task BuildPingRequestTest()
         {
-            Uri request = NetworkRequest.BuildPingRequest(_header, 32123, "Digging a hellevator 👌", out MultipartFormDataContent multipart);
+            Uri request = NetworkRequest.BuildPingRequest(_header, "Digging a hellevator 👌", out MultipartFormDataContent multipart);
             Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=ping&g=32123", request.ToString());
 
             Assert.IsNotNull(multipart.First().Headers.ContentDisposition);
@@ -58,7 +58,7 @@ namespace RAStandaloneIntegrationTests.Network
         [TestMethod]
         public void BuildAwardAchievementTest()
         {
-            Uri request = NetworkRequest.BuildAwardAchievementRequest(_header, true, 32123);
+            Uri request = NetworkRequest.BuildAwardAchievementRequest(_header, 32123);
             Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=awardachievement&h=1&a=32123&v=7a3f30386627952180d5afbae3beee6f", request.ToString());
         }
 
@@ -69,7 +69,7 @@ namespace RAStandaloneIntegrationTests.Network
         [TestMethod]
         public async Task BuildAwardAchievementsRequestTest()
         {
-            Uri request = NetworkRequest.BuildAwardAchievementsRequest(_header, true, [483244, 483245, 483246], out MultipartFormDataContent multipart);
+            Uri request = NetworkRequest.BuildAwardAchievementsRequest(_header, [483244, 483245, 483246], out MultipartFormDataContent multipart);
             Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=awardachievements", request.ToString());
 
             Assert.IsNotNull(multipart.First().Headers.ContentDisposition);
