@@ -20,7 +20,7 @@ namespace RAStandaloneIntegrationTests.Data
         [TestMethod]
         public void RaAchievementTest()
         {
-            string json = "{\"Title\":\"Timber!!\",\"Description\":\"Chop down your first tree.\",\"Points\":1,\"Type\":\"\",\"Category\":5,\"Id\":483247,\"Badge\":\"12345\",\"Subset\":\"\"}";
+            string json = "{\"Title\":\"Timber!!\",\"Description\":\"Chop down your first tree.\",\"Points\":1,\"Type\":\"\",\"Category\":5,\"Id\":483247,\"Badge\":\"12345\",\"Set\":123}";
             RaAchievement? achievement = JsonSerializer.Deserialize<RaAchievement>(json);
 
             Assert.IsNotNull(achievement);
@@ -31,7 +31,7 @@ namespace RAStandaloneIntegrationTests.Data
             Assert.AreEqual(5, achievement.Category);
             Assert.AreEqual(483247, achievement.Id);
             Assert.AreEqual("12345", achievement.Badge);
-            Assert.AreEqual("", achievement.Subset);
+            Assert.AreEqual(123, achievement.Set);
         }
     }
 }
