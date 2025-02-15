@@ -33,7 +33,7 @@ namespace RAStandaloneIntegrationTests.Network
         [TestMethod]
         public void BuildStartSessionRequestTest()
         {
-            Uri request = NetworkRequest.BuildStartSessionRequest(_header);
+            Uri request = NetworkRequest.BuildStartSessionRequest(_header, 32123);
             Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=startsession&g=32123", request.ToString());
         }
 
