@@ -90,14 +90,22 @@ namespace RAStandaloneIntegrationTests.Network
         [TestMethod]
         public void SuccessTest()
         {
-            string json = "{\"Success\":true,\"HardcoreUnlocks\":[{\"ID\":483244,\"When\":1735947878},{\"ID\":483245,\"When\":1735947888}],\"ServerNow\":1735947898}";
+            string json = "{\"Success\":true,\"HardcoreUnlocks\":[{\"ID\":483244,\"When\":1735947878},{\"ID\":483245,\"When\":1735947888}],\"Unlocks\":[{\"ID\":483246,\"When\":1735947878},{\"ID\":483247,\"When\":1735947888}],\"ServerNow\":1735947898}";
             StartSessionResponse response = JsonSerializer.Deserialize<StartSessionResponse>(json);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.Success);
-            Assert.AreEqual(2, response.GetUnlockedAchIds().Count);
-            Assert.AreEqual(483244, response.GetUnlockedAchIds()[0]);
-            Assert.AreEqual(483245, response.GetUnlockedAchIds()[1]);
+
+            // Hardcore
+            Assert.AreEqual(2, response.GetUnlockedAchIds(true).Count);
+            Assert.AreEqual(483244, response.GetUnlockedAchIds(true)[0]);
+            Assert.AreEqual(483245, response.GetUnlockedAchIds(true)[1]);
+
+            // Softcore
+            Assert.AreEqual(2, response.GetUnlockedAchIds(false).Count);
+            Assert.AreEqual(483246, response.GetUnlockedAchIds(false)[0]);
+            Assert.AreEqual(483247, response.GetUnlockedAchIds(false)[1]);
+
             Assert.AreEqual(1735947898, response.ServerTime);
         }
 
