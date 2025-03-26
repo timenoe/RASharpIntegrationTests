@@ -59,7 +59,7 @@ namespace RASharpIntegrationTests.Network
         public void BuildAwardAchievementTest()
         {
             Uri request = NetworkRequest.BuildAwardAchievementRequest(_header, 32123);
-            Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=awardachievement&h=1&a=32123&v=f4061a12710a0b39a9d07c960c3f4365", request.ToString());
+            Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=awardachievement&h=1&a=32123&v=27eace80302659f15fa2f2b16f557dfc", request.ToString());
         }
 
         /// <summary>
