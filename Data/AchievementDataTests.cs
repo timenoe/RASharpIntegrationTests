@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using RASharpIntegration.Data;
 
-namespace RAStandaloneIntegrationTests.Data
+namespace RASharpIntegrationTests.Data
 {
     [TestClass]
     public sealed class AchievementDataTests
@@ -10,7 +10,7 @@ namespace RAStandaloneIntegrationTests.Data
         public void RaGameTest()
         {
             string json = "{\"Id\":32123,\"Name\":\"Terraria\"}";
-            RaGame? game = JsonSerializer.Deserialize<RaGame>(json);
+            RaGame game = JsonSerializer.Deserialize<RaGame>(json);
 
             Assert.IsNotNull(game);
             Assert.AreEqual(32123, game.Id);
@@ -21,7 +21,7 @@ namespace RAStandaloneIntegrationTests.Data
         public void RaAchievementTest()
         {
             string json = "{\"Title\":\"Timber!!\",\"Description\":\"Chop down your first tree.\",\"Points\":1,\"Type\":\"\",\"Category\":5,\"Id\":483247,\"Badge\":\"12345\",\"Set\":123}";
-            RaAchievement? achievement = JsonSerializer.Deserialize<RaAchievement>(json);
+            RaAchievement achievement = JsonSerializer.Deserialize<RaAchievement>(json);
 
             Assert.IsNotNull(achievement);
             Assert.AreEqual("Timber!!", achievement.Title);

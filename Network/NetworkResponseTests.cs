@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using RASharpIntegration.Network;
 
-namespace RAStandaloneIntegrationTests.Network
+namespace RASharpIntegrationTests.Network
 {
     /// <summary>
     /// Used to test the BaseResponse class

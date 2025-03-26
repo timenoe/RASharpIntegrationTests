@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using RASharpIntegration.Network;
 
-namespace RAStandaloneIntegrationTests.Network
+namespace RASharpIntegrationTests.Network
 {
     /// <summary>
     /// Used to test the NetworkRequest class
@@ -59,7 +59,7 @@ namespace RAStandaloneIntegrationTests.Network
         public void BuildAwardAchievementTest()
         {
             Uri request = NetworkRequest.BuildAwardAchievementRequest(_header, 32123);
-            Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=awardachievement&h=1&a=32123&v=7a3f30386627952180d5afbae3beee6f", request.ToString());
+            Assert.AreEqual("https://ra.org/dorequest.php?u=TimmoneSimmons&t=0123456789abcdef&r=awardachievement&h=1&a=32123&v=f4061a12710a0b39a9d07c960c3f4365", request.ToString());
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace RAStandaloneIntegrationTests.Network
 
             Assert.IsNotNull(multipart.ElementAt(2).Headers.ContentDisposition);
             Assert.AreEqual("v", multipart.ElementAt(2).Headers.ContentDisposition?.Name);
-            Assert.AreEqual("9e9cf35e8d0c9fc0cc26061b556ce226", await multipart.ElementAt(2).ReadAsStringAsync());
+            Assert.AreEqual("a07b02461421816b275c5c5e6a9f7dfe", await multipart.ElementAt(2).ReadAsStringAsync());
         }
     }
 }
